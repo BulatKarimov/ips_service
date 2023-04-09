@@ -5,7 +5,7 @@ module IpsService
     module Ips
       class Destroy < Ips::Action
         def handle(request, response)
-          #TODO check ip exists
+          # TODO: check ip exists
           ip_repo.destroy(request.params[:id])
 
           response.status = :no_content

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module IpsService
   module Actions
     module Ips
       class Action < IpsService::Action
-        include Deps["repos.ip_repo"]
+        include Deps['repos.ip_repo']
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module IpsService
   module Repos
     class IpRepo
@@ -20,7 +22,7 @@ module IpsService
       end
 
       def create(ip_address:, enabled:)
-        attributes = { ip_address: ip_address, enabled: enabled }.compact
+        attributes = {ip_address: ip_address, enabled: enabled}.compact
 
         relation.changeset(:create, attributes).commit
       end
