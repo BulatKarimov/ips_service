@@ -3,13 +3,12 @@
 module IpsService
   module Actions
     module Ips
-      class Disable < IpsService::Action
-        include Deps["repos.ip_repo"]
-
+      class Disable < Ips::Action
         def handle(request, response)
+          #TODO check ip exists
           ip = ip_repo.disable(request.params[:id])
 
-          response.status = 200
+          response.status = :ok
           response.body = ip.to_json
         end
       end

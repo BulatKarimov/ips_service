@@ -4,7 +4,7 @@ module IpsService
       include Deps['database.rom']
 
       def relation
-        rom.relations[:ips]
+        @relation ||= rom.relations[:ips]
       end
 
       def find(primary_key)
@@ -23,6 +23,10 @@ module IpsService
         attributes = { ip_address: ip_address, enabled: enabled }.compact
 
         relation.changeset(:create, attributes).commit
+      end
+
+      def destroy(primary_key)
+        relation.by_pk(primary_key).changeset(:delete).commit
       end
     end
   end
