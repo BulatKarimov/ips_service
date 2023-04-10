@@ -13,6 +13,10 @@ module IpsService
         relation.by_pk(primary_key).one
       end
 
+      def collect_by(**attrs)
+        relation.where(attrs)
+      end
+
       def enable(primary_key)
         relation.by_pk(primary_key).changeset(:update, enabled: true).commit
       end
