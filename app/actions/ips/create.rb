@@ -23,11 +23,6 @@ module IpsService
           response.format = :json
           response.body = {error: "IP address #{request.params[:ip]} already exists"}.to_json
         end
-
-        # TODO: rm
-        def verify_csrf_token?(*)
-          false
-        end
       end
     end
   end

@@ -14,6 +14,7 @@ module IpsService
         delete '/ips/:id', to: 'ips.destroy'
         delete '/ips/:id', to: 'ips.destroy'
         get '/ips/:id/ip_stats', to: 'ip_stats.index'
+        get "/ips", to: "ips.index"
       end
     end
 

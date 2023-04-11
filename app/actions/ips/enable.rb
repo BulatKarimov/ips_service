@@ -6,11 +6,14 @@ module IpsService
     module Ips
       class Enable < Ips::Action
         def handle(request, response)
-          # TODO: check ip exists
-          ip = ip_repo.enable(request.params[:id])
 
-          response.status = :ok
-          response.body = ip.to_json
+          if ip = ip_repo.enable(request.params[:id])
+            response.status = :ok
+            response.body = ip.to_json
+          else
+            response.status = :not_found
+            response.body = { errors: 'ip not found' }.to_json
+          end
         end
       end
     end
