@@ -24,23 +24,6 @@ module IpsService
       end
 
       def batch_insert_ping_results(ping_results)
-        # ping_results ||= (0..10).map do
-        #   {
-        #     uid: SecureRandom.uuid,
-        #     rtt: rand/rand,
-        #     ip_address: '8.8.8.8',
-        #     timestamp: (Time.now.utc).strftime('%Y-%m-%d %H:%M:%S')
-        #   }
-        # end
-        #
-        # ping_results += (0..3).map do
-        #   {
-        #     uid: SecureRandom.uuid.to_s,
-        #     rtt: nil,
-        #     ip_address: '8.8.8.8',
-        #     timestamp: (Time.now.utc).strftime('%Y-%m-%d %H:%M:%S')
-        #   }
-        # end
         Hanami.logger.info(Hanami.app['settings'].clickhouse_url)
         Hanami.logger.info(connection.config.url.to_s)
         connection.insert('ip_stats', ping_results)

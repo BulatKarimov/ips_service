@@ -10,7 +10,7 @@ module IpsService
             response.body = {}.to_json
           else
             response.status = :not_found
-            response.body = { errors: 'ip not found' }.to_json
+            response.body = {errors: 'ip not found'}.to_json
           end
         end
       end
