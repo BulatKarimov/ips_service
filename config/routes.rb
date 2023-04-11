@@ -13,7 +13,7 @@ module IpsService
         post '/ips/:id/disable', to: 'ips.disable'
         delete '/ips/:id', to: 'ips.destroy'
         delete '/ips/:id', to: 'ips.destroy'
-        get '/ips/:id/ip_stats', to: 'ip_stats.index'
+        get '/ips/:ip_id/ip_stats', to: 'ip_stats.index'
         get "/ips", to: "ips.index"
       end
     end
