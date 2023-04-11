@@ -8,10 +8,14 @@ module IpsService
     module Ips
       module Params
         class Create < Hanami::Action::Params
-          # TODO: ipv4/ipv6 format check
           params do
             optional(:enabled).value(:bool)
-            required(:ip).filled(:string)
+            required(:ip).filled(
+              :string,
+              format?: Regexp.union(IPAddr::RE_IPV4ADDRLIKE,
+                                    IPAddr::RE_IPV6ADDRLIKE_FULL,
+                                    IPAddr::RE_IPV6ADDRLIKE_COMPRESSED)
+            )
           end
         end
       end
