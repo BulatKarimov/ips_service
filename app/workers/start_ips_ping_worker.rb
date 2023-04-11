@@ -3,8 +3,10 @@ require 'sidekiq'
 module IpsService
   module Workers
     class StartIpsPingWorker
-      include Sidekiq::Job
-      include Deps['repos.ip_repo', 'workers.ips_ping_worker']
+      include Sidekiq::Worker
+      include Deps['repos.ip_repo', 'workers.ips_ping_worker', 'clickhouse.config']
+
+      sidekiq_options queue: :ips_ping_starter, retry: false
 
       BATCH_SIZE = 100
 
@@ -12,11 +14,7 @@ module IpsService
         Hanami.logger.info('Ip addresses ping starting...')
 
         ip_repo.collect_by(enabled: true).each_batch(size: BATCH_SIZE) do |ips|
-          ip_ids = ips.pluck(:id)
-
-          ips_ping_worker.perform(ips.pluck(:id))
-
-          # ips_ping_worker.perform_async(ips.pluck(:id))
+          ips_ping_worker.class.perform_async(ips.pluck(:id))
         end
       end
     end

@@ -4,8 +4,6 @@ module IpsService
   module Actions
     module Ips
       class Create < Ips::Action
-        include Deps['repos.ip_repo']
-
         params Params::Create
 
         def handle(request, response)

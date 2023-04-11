@@ -1,0 +1,4 @@
+start_ip_address_ping:
+  cron: '*/2 * * * * *'
+  class: 'IpsService::Workers::StartIpsPingWorker'
+  queue: ips_ping_starter

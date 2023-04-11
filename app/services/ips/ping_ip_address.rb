@@ -11,45 +11,14 @@ module IpsService
         end
 
         def call(ip_address)
+          #TODO ipv6 ping
+
           net_ping = Net::Ping::External.new(ip_address, nil, PING_TIMEOUT)
 
-          if net_ping.ping
-            {
-              rtt: net_ping.duration,
-              is_lost: false,
-              timestamp: Time.now.to_i
-            }
-          else
-            {
-              rtt: nil,
-              is_lost: true,
-              timestamp: Time.now.to_i
-            }
-          end
-
-
-          # ip_address.reduce({}) do |result, ip_address|
-          #   puts result
-          #   net_ping = Net::Ping::External.new(ip_address)
-          #
-          #   data = if net_ping.ping
-          #            {
-          #              rtt: net_ping.duration,
-          #              is_lost: false,
-          #              timestamp: Time.now.to_i
-          #            }
-          #          else
-          #            {
-          #              rtt: nil,
-          #              is_lost: true,
-          #              timestamp: Time.now.to_i
-          #            }
-          #          end
-          #
-          #   puts result
-          #   puts data
-          #
-          #   result[ip_address] = data
+          {
+            timestamp: Time.now.utc.strftime('%Y-%m-%d %H:%M:%S'),
+            rtt: net_ping.ping ? net_ping.duration : nil
+          }
         end
       end
     end

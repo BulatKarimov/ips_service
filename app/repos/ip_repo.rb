@@ -10,7 +10,7 @@ module IpsService
       end
 
       def find(primary_key)
-        relation.by_pk(primary_key).one
+        relation.by_pk(primary_key)
       end
 
       def collect_by(**attrs)

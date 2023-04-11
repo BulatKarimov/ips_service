@@ -6,5 +6,6 @@ module IpsService
     setting :clickhouse_url, constructor: Types::String
     setting :clickhouse_username, constructor: Types::String
     setting :clickhouse_password, constructor: Types::String
+    setting :redis_url, constructor: Types::String
   end
 end

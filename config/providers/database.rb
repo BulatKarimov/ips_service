@@ -11,7 +11,7 @@ Hanami.app.register_provider :database, namespace: true do
     ch_config = ClickHouse.config do |config|
       config.logger = Hanami.logger
       config.adapter = :net_http
-      config.database = "ips_service_development"
+      config.database = 'ips_service_development'
       config.url = target['settings']
       config.timeout = 60
       config.open_timeout = 3
@@ -30,7 +30,7 @@ Hanami.app.register_provider :database, namespace: true do
       config.password = '9Pk.HekbZY7AT'
 
       # if you want to add settings to all queries
-      config.global_params = { mutations_sync: 1 }
+      config.global_params = {mutations_sync: 1}
 
       # choose a ruby JSON parser (default one)
       config.json_parser = ClickHouse::Middleware::ParseJson

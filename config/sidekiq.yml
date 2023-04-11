@@ -1,0 +1,30 @@
+# config/sidekiq.yml
+:verbose: true
+:concurrency: 10
+:timeout: 25
+
+:queues:
+  - important
+  - ips_ping_starter
+
+:env:
+  clickhouse_url: "https://k8uiq55992.eu-central-1.aws.clickhouse.cloud:8443"
+  clickhouse_username: "default"
+  clickhouse_password: "9Pk.HekbZY7AT"
+  redis_url: "redis://127.0.0.1:6379/0"
+
+#:scheduler:
+  # Sidekiq-Scheduler settings
+#  :enabled: true
+#  :dynamic: true
+#  :queue_name: scheduler
+#  :scheduler_interval: '5s'
+#  :scheduler_deadline: '60s'
+
+  # Job schedules
+#  :schedule:
+#    generate_sitemap:
+#      # Runs once per minute
+#      cron: '*/2 * * * * *'
+#      class: IpsService::Workers::StartIpsPingWorker
+#      queue: ips_ping_starter

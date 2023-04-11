@@ -15,5 +15,11 @@ module IpsService
         [<blue>%<progname>s</blue>] [%<severity>s] [<green>%<time>s</green>] %<message>s %<payload>s
       TMPL
     end
+
+    config.actions.sessions = :cookie, {
+      key: "_bookshelf.session",
+      secret: 'secret',
+      expire_after: 60 * 60 * 24 * 365
+    }
   end
 end
