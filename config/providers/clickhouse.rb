@@ -44,6 +44,10 @@ Hanami.app.register_provider :clickhouse, namespace: true do
   end
 
   start do
+    conn = ClickHouse::Connection.new(target['clickhouse.config'])
+
+    raise unless conn.ping
+
     register 'connection', ClickHouse::Connection.new(target['clickhouse.config'])
   end
 end
