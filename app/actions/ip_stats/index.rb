@@ -6,7 +6,7 @@ module IpsService
       class Index < IpsService::Action
         include Deps['repos.ip_stat_repo', 'repos.ip_repo']
         params do
-          #TODO DateTime UTC format check
+          # TODO: DateTime UTC format check
           required(:start_time).filled(:string)
           required(:start_time).filled(:string)
         end

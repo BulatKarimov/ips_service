@@ -4,9 +4,13 @@ Hanami.app.register_provider :clickhouse, namespace: true do
   prepare do
     require 'click_house'
 
-    class Dry::Logger::Dispatcher
-      def debug?
-        false
+    module Dry
+      module Logger
+        class Dispatcher
+          def debug?
+            false
+          end
+        end
       end
     end
 

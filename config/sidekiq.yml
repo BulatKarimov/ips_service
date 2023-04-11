@@ -1,10 +1,10 @@
 # config/sidekiq.yml
-:verbose: true
-:concurrency: 10
-:timeout: 25
+#:verbose: true
+#:concurrency: 10
+#:timeout: 25
 
 :queues:
-  - important
+  - ips_ping_worker
   - ips_ping_starter
 
 :env:

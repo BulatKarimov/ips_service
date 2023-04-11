@@ -17,7 +17,7 @@ module IpsService
     end
 
     config.actions.sessions = :cookie, {
-      key: "_bookshelf.session",
+      key: '_bookshelf.session',
       secret: 'secret',
       expire_after: 60 * 60 * 24 * 365
     }

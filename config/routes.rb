@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "sidekiq/web"
+require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 module IpsService
@@ -12,8 +12,8 @@ module IpsService
     post '/ips/:id/disable', to: 'ips.disable'
     delete '/ips/:id', to: 'ips.destroy'
     delete '/ips/:id', to: 'ips.destroy'
-    get "/ip_stats", to: "ip_stats.index"
+    get '/ip_stats', to: 'ip_stats.index'
 
-    mount Sidekiq::Web, at: "/sidekiq"
+    mount Sidekiq::Web, at: '/sidekiq'
   end
 end

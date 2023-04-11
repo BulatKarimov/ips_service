@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/ping'
 
 module IpsService
@@ -11,7 +13,7 @@ module IpsService
         end
 
         def call(ip_address)
-          #TODO ipv6 ping
+          # TODO: ipv6 ping
 
           net_ping = Net::Ping::External.new(ip_address, nil, PING_TIMEOUT)
 

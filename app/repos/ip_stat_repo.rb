@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'securerandom'
 
 module IpsService
@@ -17,7 +18,7 @@ module IpsService
             sqrt(VAR_POP(rtt)) AS std_dev_rtt,
             (countIf(rtt = 0) / count(*)) * 100 AS packet_loss_percent
           FROM ip_stats
-          WHERE timestamp >= '#{start_time.to_s}' AND timestamp < '#{end_time.to_s}' AND ip_address = '#{ip_address.to_s}'
+          WHERE timestamp >= '#{start_time}' AND timestamp < '#{end_time}' AND ip_address = '#{ip_address}'
           GROUP BY ip_address
         ")
       end
@@ -40,10 +41,10 @@ module IpsService
         #     timestamp: (Time.now.utc).strftime('%Y-%m-%d %H:%M:%S')
         #   }
         # end
-        Hanami.logger.info(Hanami.app["settings"].clickhouse_url)
+        Hanami.logger.info(Hanami.app['settings'].clickhouse_url)
         Hanami.logger.info(connection.config.url.to_s)
         connection.insert('ip_stats', ping_results)
-      rescue => e
+      rescue StandardError => e
         Hanami.logger.error(e)
       end
     end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-#TODO ref
+
+# TODO: ref
 source 'https://rubygems.org'
 
 gem 'hanami', '~> 2.0'
@@ -20,9 +21,9 @@ gem 'sequel_pg'
 gem 'click_house'
 gem 'oj'
 
+gem 'redis'
 gem 'sidekiq', '~> 6.5'
 gem 'sidekiq-cron'
-gem 'redis'
 
 gem 'byebug'
 
