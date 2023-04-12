@@ -1,29 +1,40 @@
 # IpsService
 
-Предположим, нам нужна система мониторинга доступности IP-адресов. Напишем небольшое приложение, которое позволит регистрировать и удалять IP-адреса, а также выполнять проверку их доступности, где используя результаты проверки мы можем выполнить расчет статистики.
+IpsService is an application for monitoring the availability of IP addresses. 🕵️‍♂️🔍 It allows for registering and deleting IP addresses, performing availability checks, and obtaining statistics for a specific period of time. 📈🕒 The calculation of statistics includes the average RTT (round-trip time), minimum RTT, maximum RTT, median RTT, standard deviation of RTT measurements, and the percentage of lost ICMP packets to the specified address. 💻📊 Statistics are calculated at the database level. 🤓
 
-# API
-- POST /ips - добавить адрес с параметрами (enabled: bool, ip: ipv4/ipv6 address)
-- POST /ips/:id/enable - включить сбор статистики ip
-- POST /ips/:id/disable - выключить сбор статистики ip
-- GET /ips/:id/stats - получить статистику для адреса (time_from: datetime, time_to: datetime)
-- DELETE /ips/:id - выключить сбор и удалить адрес
+ICMP requests are used to check availability. 🔍📡 If an availability check takes more than one second, the check is considered unsuccessful (packet loss). 🙅‍♂️💥
 
-# Требования к задаче
-- проверка должна выполняться раз в N времени (например, раз в минуту);
-- расчет статистики целиком на уровне базы данных;
-- расчет статистики должен включать в себя за период: среднее RTT (время отклика), минимальное RTT, максимальное RTT, медианное RTT, среднеквадратичное отклонение замеров RTT, процент потерянных пакетов ICMP до указанного адреса;
-- не использовать rails, за исключением activesupport, Active Record;
-- если проверка доступности занимает более одной секунды, то такая проверка считается неудачной (потеря пакетов) и должна быть прервана;
-- если какую-то часть времени в выбранном периоде IP-адрес был вне расчета статистики (не был добавлен или был удален) — эту часть времени учитывать не нужно. Например, мы добавили IP-адрес 8.8.8.8 в 1 час, выключили в 2, включили в 3 и выключили в 4. Если запрашиваем статистику с 1 по 4 часа — надо объединить интервалы 1-2, 3-4 и отдать эту статистику по объединенному интервалу. Если IP-адрес не был в расчете статистики всё время или был настолько мало времени, что мы не успели сделать хотя бы 1 замер, – надо вернуть сообщение об ошибке.
+As a true technology guru, I used Hanami v2 as the web server. 💪💻
 
-# Мы хотим посмотреть, как ты
-- используешь различные библиотеки;
-- подбираешь стек для хранения и обсчёта статистики;
-- работаешь с требованиями и кодом.
+I also used Clickhouse for storing statistics. Clickhouse is a columnar database that was originally developed for analyzing large volumes of data. 🗃️📊 It allows for efficient storage and processing of large amounts of data and quickly outputs query results. 💾💨
 
-# Необязательно, но будет плюсом
-- не использовать activesupport и Active Record;
-- сделать запуск проекта с помощью docker compose;
-- добавить поддержку IPv6 IP-адресов;
-- настроить GitHub Actions (или любой другой CI, зависит от места размещения тестового задания) с запуском тестов.
+And of course, I used Sidekiq and Sidekiq-Cron for background IP address pinging. Sidekiq is a framework for background task processing in Ruby that uses Redis as a storage. Sidekiq-Cron is a plugin for Sidekiq that allows for scheduling tasks. 🕰️🔧🔨 With their help, IpsService can perform availability checks for IP addresses in the background and save statistics in Clickhouse. 🤖💾
+
+# Usage
+
+👨‍💻 To run the IpsService application, you need to follow these steps:
+
+Install Docker and Docker Compose on your system 🐳
+
+Clone the IpsService repository from GitHub 📂
+
+Navigate to the project directory in your terminal 📁
+
+Build the Docker image using the following command:
+```bash
+docker-compose build
+```
+Once the image is built, start the application using the following command:
+
+```bash
+docker-compose up
+```
+The application will now start running in a Docker container, and you can access it using your web browser at http://localhost:2300 🌐
+
+By using Docker and Docker Compose, I made sure that all the necessary dependencies are packaged together and the application runs smoothly on any system. 🚀
+
+# API Doc
+📄 Swagger documentation will be available at `http://localhost:2300/doc` after launching the project.
+
+
+
