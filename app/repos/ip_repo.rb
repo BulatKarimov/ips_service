@@ -2,7 +2,7 @@
 
 module IpsService
   module Repos
-    class IpRepo < ROM::Repository::Root
+    class IpRepo
       include Deps['database.rom']
 
       #TODO repos - relations mapping

@@ -15,6 +15,7 @@ namespace :db do
   end
 end
 
+
 namespace :clickhouse do
   task create: :environment do
     config = Hanami.app['clickhouse.config']

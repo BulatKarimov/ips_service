@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "2300:2300"
+    depends_on:
+      - db
+      - redis
+    environment:
+      RACK_ENV: production
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/ips_service
+      CLICKHOUSE_URL: https://k8uiq55992.eu-central-1.aws.clickhouse.cloud:8443
+      CLICKHOUSE_USERNAME: default
+      CLICKHOUSE_PASSWORD: 9Pk.HekbZY7AT
+      REDIS_URL: redis://redis:6379/0
+    command: sh -c "bundle exec rake db:migrate && bundle exec hanami server -p 2300"
+
+  sidekiq:
+    build: .
+    depends_on:
+      - db
+      - redis
+    environment:
+      RACK_ENV: production
+      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/ips_service
+      CLICKHOUSE_URL: https://k8uiq55992.eu-central-1.aws.clickhouse.cloud:8443
+      CLICKHOUSE_USERNAME: default
+      CLICKHOUSE_PASSWORD: 9Pk.HekbZY7AT
+      REDIS_URL: redis://redis:6379/0
+    command: sh -c "bundle exec rake db:setup && bundle exec sidekiq -r /app/config/sidekiq.rb -C /app/config/sidekiq.yml"
+
+  db:
+    image: postgres:15.1
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: ips_service
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
