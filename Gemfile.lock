@@ -149,7 +149,6 @@ GEM
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
-    ipaddress (0.8.3)
     json (2.6.3)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -284,7 +283,6 @@ DEPENDENCIES
   hanami-router (~> 2.0)
   hanami-rspec
   hanami-validations (~> 2.0)
-  ipaddress
   net-ping
   oj
   parallel
