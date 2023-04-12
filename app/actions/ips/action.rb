@@ -8,7 +8,6 @@ module IpsService
 
         private
 
-        # TODO: rm
         def verify_csrf_token?(*)
           false
         end

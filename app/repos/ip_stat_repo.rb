@@ -8,6 +8,10 @@ module IpsService
       include Deps['clickhouse.connection']
 
       def get_stats_in_range(start_time:, end_time:, ip_address:)
+        #TODO убрать нахуй интерпаляцию с sql запроса
+        #TODO не считать median и std_dev для rtt == 0
+        #TODO убрать группировку
+
         connection.select_one("
           SELECT
             ip_address,
@@ -24,11 +28,7 @@ module IpsService
       end
 
       def batch_insert_ping_results(ping_results)
-        Hanami.logger.info(Hanami.app['settings'].clickhouse_url)
-        Hanami.logger.info(connection.config.url.to_s)
         connection.insert('ip_stats', ping_results)
-      rescue StandardError => e
-        Hanami.logger.error(e)
       end
     end
   end

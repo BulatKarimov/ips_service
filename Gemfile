@@ -18,6 +18,8 @@ gem 'rom-factory'
 gem 'rom-sql', '~> 3.6'
 gem 'sequel_pg'
 
+gem 'parallel'
+
 gem 'click_house'
 gem 'oj'
 

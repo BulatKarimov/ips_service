@@ -287,6 +287,7 @@ DEPENDENCIES
   ipaddress
   net-ping
   oj
+  parallel
   pg
   puma
   rack-test

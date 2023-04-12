@@ -19,7 +19,7 @@ module IpsService
         private
 
         def handle_pg_uniq_error(request, response, _exception)
-          response.status = 422
+          response.status = :unprocessable_entity
           response.format = :json
           response.body = {error: "IP address #{request.params[:ip]} already exists"}.to_json
         end
