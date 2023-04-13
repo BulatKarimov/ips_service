@@ -14,12 +14,3 @@ namespace :db do
     ROM::SQL::RakeSupport.env = Hanami.app['database.config']
   end
 end
-
-
-namespace :clickhouse do
-  task create: :environment do
-    config = Hanami.app['clickhouse.config']
-    connection = ClickHouse::Connection.new(config)
-    connection.create_database(config.database, if_not_exists: true)
-  end
-end

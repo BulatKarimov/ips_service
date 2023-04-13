@@ -5,8 +5,6 @@ module IpsService
     class IpRepo
       include Deps['database.rom']
 
-      #TODO repos - relations mapping
-
       def relation
         @relation ||= rom.relations[:ips]
       end

@@ -7,7 +7,7 @@ Hanami.app.register_provider :database, namespace: true do
     config = ROM::Configuration.new(:sql, target['settings'].database_url)
 
     register 'config', config
-    register 'db', config.gateways[:default].connection
+    register 'connection', config.gateways[:default].connection
   end
 
   start do

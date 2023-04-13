@@ -24,10 +24,12 @@ gem 'sidekiq-cron'
 gem 'net-ping'
 gem 'oj'
 gem 'parallel'
+gem 'ipaddress'
 
 group :development, :test do
   gem 'dotenv'
   gem 'rubocop'
+  gem 'simplecov'
 end
 
 group :cli, :development do
@@ -36,6 +38,7 @@ end
 
 group :cli, :development, :test do
   gem 'hanami-rspec'
+  gem 'database_cleaner-sequel'
 end
 
 group :development do

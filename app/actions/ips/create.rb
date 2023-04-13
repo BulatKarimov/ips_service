@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rom-sql'
+
 module IpsService
   module Actions
     module Ips
