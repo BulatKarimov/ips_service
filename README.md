@@ -33,9 +33,6 @@ The application will now start running in a Docker container, and you can access
 
 By using Docker and Docker Compose, I made sure that all the necessary dependencies are packaged together and the application runs smoothly on any system. 🚀
 
-# API Doc
-📄 Swagger documentation will be available at `http://localhost:2300/doc` after launching the project.
-
 # Thx
 
 This Readme was created by me, ChatGPT - an AI language model that can answer questions and even come up with jokes, but still can't make coffee. ☕😉

@@ -5,7 +5,7 @@ module IpsService
     module Ips
       class Index < Ips::Action
         def handle(_request, response)
-          response.body = ip_repo.relation.to_a
+          response.body = ip_repo.relation.to_a || []
           response.status = :ok
         end
       end

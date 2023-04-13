@@ -6,3 +6,4 @@ log/*
 
 /postgres-data
 dump.rdb
+tmp
