@@ -19,10 +19,9 @@ module IpsService
 
           halt :not_found, {errors: 'ip not exists'}.to_json if ip.nil?
 
-          # TODO: переименовать эту хуйни ибо не ясно что возвращается
-          ip_stats = ip_stat_repo.get_stats_in_range(start_time: request.params[:start_time],
-                                                     end_time: request.params[:end_time],
-                                                     ip_address: ip[:ip_address])
+          ip_stats = ip_stat_repo.get_stats_info(start_time: request.params[:start_time],
+                                                 end_time: request.params[:end_time],
+                                                 ip_address: ip[:ip_address])
 
           halt :unprocessable_entity, {errors: 'no stats yet'}.to_json if ip_stats.nil?
 
