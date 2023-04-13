@@ -5,7 +5,9 @@ module IpsService
     module Ips
       class Disable < Ips::Action
         def handle(request, response)
-          if ip = ip_repo.disable(request.params[:id])
+          ip = ip_repo.disable(request.params[:id])
+
+          if ip
             response.status = :ok
             response.body = ip.to_json
           else

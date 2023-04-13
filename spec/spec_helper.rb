@@ -17,7 +17,7 @@ Factory = ROM::Factory.configure do |config|
   config.rom = Hanami.app['database.rom']
 end
 
-Dir["#{File.dirname(__FILE__)}/support/factories/*.rb"].each { |file| require file }
+Dir["#{File.dirname(__FILE__)}/support/factories/*.rb"].sort.each {|file| require file }
 
 DatabaseCleaner[:sequel, db: Hanami.app['database.connection']]
 
@@ -33,4 +33,3 @@ RSpec.configure do |config|
     end
   end
 end
-

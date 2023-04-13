@@ -4,7 +4,7 @@ RSpec.describe IpsService::Repos::IpRepo do
   let(:ip) { Factory[:ip, enabled: is_enabled] }
   let(:is_enabled) { true }
 
-  describe "#find" do
+  describe '#find' do
     subject { described_class.new.find(ip[:id]).one }
 
     specify do

@@ -8,9 +8,9 @@ module IpsService
       include Deps['clickhouse.connection']
 
       def get_stats_in_range(start_time:, end_time:, ip_address:)
-        #TODO убрать нахуй интерпаляцию с sql запроса
-        #TODO не считать median и std_dev для rtt == 0
-        #TODO убрать группировку
+        # TODO: убрать нахуй интерпаляцию с sql запроса
+        # TODO не считать median и std_dev для rtt == 0
+        # TODO убрать группировку
 
         connection.select_one("
           SELECT
