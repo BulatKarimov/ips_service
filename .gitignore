@@ -3,3 +3,6 @@ log/*
 
 .idea
 .byebug_history
+
+/postgres-data
+dump.rdb

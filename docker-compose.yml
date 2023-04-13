@@ -1,37 +1,31 @@
 version: '3.8'
 
+x-default: &my-app
+  build: .
+  image: myapp:0.0.1
+  depends_on:
+    - postgres
+    - redis
+  environment:
+    RACK_ENV: development
+    DATABASE_URL: postgresql://postgres:mysecretpassword@postgres:5432/ips_service
+    CLICKHOUSE_URL: https://k8uiq55992.eu-central-1.aws.clickhouse.cloud:8443
+    CLICKHOUSE_USERNAME: default
+    CLICKHOUSE_PASSWORD: 9Pk.HekbZY7AT
+    REDIS_URL: redis://redis:6379/0
+
 services:
   web:
-    build: .
+    <<: *my-app
     ports:
       - "2300:2300"
-    depends_on:
-      - db
-      - redis
-    environment:
-      RACK_ENV: production
-      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/ips_service
-      CLICKHOUSE_URL: https://k8uiq55992.eu-central-1.aws.clickhouse.cloud:8443
-      CLICKHOUSE_USERNAME: default
-      CLICKHOUSE_PASSWORD: 9Pk.HekbZY7AT
-      REDIS_URL: redis://redis:6379/0
     command: sh -c "bundle exec rake db:migrate && bundle exec hanami server -p 2300"
 
   sidekiq:
-    build: .
-    depends_on:
-      - db
-      - redis
-    environment:
-      RACK_ENV: production
-      DATABASE_URL: postgresql://postgres:mysecretpassword@db:5432/ips_service
-      CLICKHOUSE_URL: https://k8uiq55992.eu-central-1.aws.clickhouse.cloud:8443
-      CLICKHOUSE_USERNAME: default
-      CLICKHOUSE_PASSWORD: 9Pk.HekbZY7AT
-      REDIS_URL: redis://redis:6379/0
+    <<: *my-app
     command: sh -c "bundle exec rake db:setup && bundle exec sidekiq -r /app/config/sidekiq.rb -C /app/config/sidekiq.yml"
 
-  db:
+  postgres:
     image: postgres:15.1
     restart: always
     environment:

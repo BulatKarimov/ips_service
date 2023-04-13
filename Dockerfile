@@ -11,7 +11,6 @@ RUN bundle install
 
 COPY . /app
 
-ENV RACK_ENV production
 ENV TZ UTC
 
 EXPOSE 2300
